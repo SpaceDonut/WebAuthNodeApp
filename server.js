@@ -6,9 +6,13 @@ const bcrypt = require("bcryptjs");
 const csurf = require("csurf");
 const helmet = require("helmet");
 
-const commentRoutes = require("./routes/comments")
+require('dotenv').config()
 
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 mongoose.connect("mongodb://localhost/ss-auth");
+
 
 let app = express();
 
@@ -42,7 +46,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(sessions({
   cookieName: "session",
-  secret: "duwangbumblebee99ripandtear666edgelord9000",
+  secret: process.env.SECRET,
   duration: 30 * 60 * 1000,
   httpOnly: true, // don't let JS code access cookies
   secure: true,   // only set cookies over https
@@ -90,6 +94,7 @@ app.post("/register", (req, res) => {
   let user = new User(req.body);
 
   user.save((err) => {
+
     if (err) {
       let err = "Something bad happened! Please try again!";
 
@@ -107,7 +112,7 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.render("/login", {
+  res.render("login", {
     csrfToken: req.csrfToken()
   });
 });

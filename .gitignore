@@ -9,3 +9,5 @@ WiredTiger*
 diagnostic.data
 data
 ./data
+
+.env
