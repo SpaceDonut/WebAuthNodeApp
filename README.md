@@ -4,7 +4,7 @@ Basic node app to test authentication in node using passport
 
 ## How to run
 1. After cloning run npm install
-2. Create a .env file and set an arbitrary secret string
+2. Create a `.env` file and set an arbitrary secret string
   ``` js
   SECRET="secret" 
   ```
